@@ -1,4 +1,4 @@
-import type { AxiosPromise, AxiosRequestHeaders, AxiosResponse } from "axios";
+import type { AxiosPromise, AxiosRequestHeaders } from "axios";
 import axios, {AxiosHeaders} from "axios";
 
 const api: string = 'https://jsonplaceholder.typicode.com/';

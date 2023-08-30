@@ -12,7 +12,7 @@ export default class UserRepositoryApi extends RestAction implements UserReposit
       return users;
     }
 
-    users = await this.get(`${URL}`);
+    users = await this.get(`${URL}`) as UserStructure[];
     useUserStore().setAll(users);
     return users;
   }

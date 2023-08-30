@@ -6,7 +6,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'user',
-      component: import('@/views/UserView.vue'),
+      component: () => import('@/views/UserView.vue'),
       meta: {
         layout: 'default',
         title: 'User list',

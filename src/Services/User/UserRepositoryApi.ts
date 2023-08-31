@@ -37,7 +37,15 @@ export default class UserRepositoryApi extends RestAction implements UserReposit
   }
 
   public async save(user: UserStructure): Promise<void> {
-    await this.post(`${URL}`, user);
+    const response = await this.post(`${URL}`, user);
+    /**
+     * Al ser un id numérico por lo tanto auto-incremental y queremos
+     * guardar el usuario en el store cogemos ese id para seteralo al nuevo
+     * usuario antes de guardarlo en el store.
+     * Si en vez de id numérico fuera un uuid, se podría generar desde el front con algún
+     * plugin en el propio caso de uso y mandarselo a la api.
+     */
+    user.id = response.id;
     this.userStore.set(user);
   }
 }

@@ -67,8 +67,10 @@ const showDetailsDialog = (userId: string) => {
 onBeforeMount(() => {
   loadUserList();
   emitter.on('userWasDeleted', loadUserList);
+  emitter.on('userWasCreated', loadUserList);
 });
 onBeforeUnmount(() => {
   emitter.off('userWasDeleted', loadUserList);
+  emitter.off('userWasCreated', loadUserList);
 })
 </script>

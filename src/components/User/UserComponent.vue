@@ -1,4 +1,7 @@
 <template>
+  <div class="create-user">
+    <user-create />
+  </div>
   <user-list>
     <!--
       Pasamos el componente user-delete como slot, ya que en este
@@ -16,6 +19,7 @@
 import UserList from "@/components/User/UserList.vue";
 import UserDetails from "@/components/User/UserDetails.vue";
 import UserDelete from "@/components/User/UserDelete.vue";
+import UserCreate from "@/components/User/UserCreate.vue";
 
 /**
  * Suelo hacer componentes por responsabilidad y dejando este componente Container

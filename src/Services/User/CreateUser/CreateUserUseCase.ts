@@ -8,7 +8,6 @@ export default class CreateUserUseCase implements UseCase {
    * El user repository es una dependencia del caso de uso.
    */
   private readonly userRepository: UserRepository;
-
   constructor(userRepository: UserRepository) {
     this.userRepository = userRepository;
   }
@@ -21,10 +20,12 @@ export default class CreateUserUseCase implements UseCase {
        * que la estructura que espera la api es la misma que se usa.
        * He incluso, se podría validar que los parametros son correctos
        * tanto si los requeridos están, como validación de email, strings,...
+       * con el servico de validaciones.
        */
       await this.userRepository.save(user);
       return { success: true };
     } catch (e) {
+      console.error(e);
       return { success: false, error: 'ErrorCreatingUser' };
     }
   }

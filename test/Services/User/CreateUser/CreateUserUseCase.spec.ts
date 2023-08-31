@@ -3,7 +3,7 @@ import CreateUserUseCase from "../../../../src/Services/User/CreateUser/CreateUs
 import UserStructure from "../../../../src/Services/User/UserStructure";
 
 const user: UserStructure = {
-    id: 5,
+    id: null,
     name: "Chelsey Dietrich",
     username: "Kamren",
     email: "Lucio_Hettinger@annie.ca",

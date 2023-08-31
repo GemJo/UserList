@@ -11,3 +11,10 @@
     vertical-align: top;
   }
 }
+
+.create-user {
+  margin-bottom: 20px;
+  &__button {
+    text-align: right;
+  }
+}

@@ -51,16 +51,16 @@ const usersProvide = [
 ];
 const userExpected =  [
     {
-        id: 1,
-        name: "Leanne Graham",
-        username: "Bret",
-        email: "Sincere@april.biz",
-    },
-    {
         id: 2,
         name: "Ervin Howell",
         username: "Antonette",
         email: "Shanna@melissa.tv",
+    },
+    {
+        id: 1,
+        name: "Leanne Graham",
+        username: "Bret",
+        email: "Sincere@april.biz",
     },
 ];
 
@@ -68,6 +68,7 @@ const userRepository = { all: vi.fn() };
 const listUserUseCase = new ListUserUseCase(userRepository);
 describe('List user and repository fails', () => {
     beforeEach(() => {
+        vi.resetAllMocks();
         userRepository.all.mockRejectedValue();
     });
 
@@ -81,8 +82,9 @@ describe('List user and repository fails', () => {
         expect(response.users).toBeUndefined();
     });
 });
-describe('List user', () => {
+describe('List user and works', () => {
     beforeEach(() => {
+        vi.resetAllMocks();
         userRepository.all.mockResolvedValue(usersProvide);
     });
 
@@ -91,8 +93,13 @@ describe('List user', () => {
         expect(response.success).toBe(true);
     });
 
-    it('should not return users collection', async () => {
+    it('must return users collection', async () => {
         const response = await listUserUseCase.execute();
         expect(response.users).toStrictEqual(userExpected);
+    });
+
+    it('must call all method', async () => {
+        await listUserUseCase.execute();
+        expect(userRepository.all).toHaveBeenCalledTimes(1);
     });
 });

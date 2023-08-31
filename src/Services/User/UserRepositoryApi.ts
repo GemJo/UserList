@@ -30,4 +30,9 @@ export default class UserRepositoryApi extends RestAction implements UserReposit
 
     return user;
   }
+
+  public async remove(id: string): Promise<void> {
+    await this.delete(`${URL}/${id}`);
+    this.userStore.remove(id);
+  }
 }

@@ -24,5 +24,9 @@ export const useUserStore = defineStore('user', () => {
         users.value[user.id] = user;
     }
 
-    return { setAll, getAll, get, set }
+    function remove(id: string): void {
+        delete users.value[id];
+    }
+
+    return { setAll, getAll, get, set, remove }
 })

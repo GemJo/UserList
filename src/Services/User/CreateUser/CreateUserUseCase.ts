@@ -25,7 +25,6 @@ export default class CreateUserUseCase implements UseCase {
       await this.userRepository.save(user);
       return { success: true };
     } catch (e) {
-      console.error(e);
       return { success: false, error: 'ErrorCreatingUser' };
     }
   }

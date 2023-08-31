@@ -16,5 +16,13 @@ export const useUserStore = defineStore('user', () => {
         return Object.values(users.value);
     }
 
-    return { setAll, getAll }
+    function get(id: string): UserStructure {
+        return users.value[id];
+    }
+
+    function set(user: UserStructure): void {
+        users.value[user.id] = user;
+    }
+
+    return { setAll, getAll, get, set }
 })

@@ -7,7 +7,7 @@
       @closed="hideDetailsDialog"
   >
     <!-- Se podría simplificar en un bucle con algún objeto que hiciera relación
-         con la key de user y el label. Sin embargo, al no mosrtrarlo todo de igual
+         con la key de user y el label. Sin embargo, al no mostrarlo todo de igual
          manera quizás hubiera acabado más enrevesado con if y else -->
     <el-descriptions v-if="user" direction="vertical" :column="2" class="user-details">
       <el-descriptions-item label="Nombre" v-bind="defaultPropertiesDescription">

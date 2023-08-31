@@ -30,6 +30,12 @@ const loading = ref<boolean>(true);
 const userList = ref<ListUser[]>([]);
 
 async function loadUserList() {
+  /**
+   * Se ha creado una carpeta /Services donde encontramos los casos de uso.
+   * Los llevo fuera en servicios para dejar "limpio" el componente y que este solo sea para
+   * mostrar y gestionar la interacción del usuario.
+   * Creo que así lo hace escalable y más limpio, entre otras cosas.
+   */
   const response = await listUserUseCase.execute();
 
   loading.value = false;
@@ -50,8 +56,8 @@ const showDetailsDialog = (userId: string) => {
    * En este caso sería ideal que el propio UserDetails tuviera el botón
    * y el mismo gestionara el abrir el dialog. Sin embargo he tenido problemillas,
    * con que la tabla estaba por encima del dialog (no estoy acostumbrada a elements),
-   * y para no entretenerme se ha usado el emitter (el eventHub de vue.js) evento para
-   * abrir dicho dialog.
+   * y para no entretenerme se ha usado el emitter (lo que sería el eventHub de vue.js)
+   * evento para abrir dicho dialog.
    */
   emitter.emit('showUserDetailsIsNeeded', userId);
 }

@@ -21,7 +21,7 @@ describe('Delete user and repository fails', () => {
         expect(response.error).toBe('ErrorDeletingUser');
     });
 });
-describe('Get user and works', () => {
+describe('Delete user and works', () => {
     beforeEach(() => {
         vi.resetAllMocks();
         userRepository.remove.mockResolvedValue();

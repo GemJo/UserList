@@ -8,13 +8,23 @@
     <el-table-column prop="name" label="Nombre" sortable />
     <el-table-column prop="username" label="username" sortable  />
     <el-table-column prop="email" label="Email" />
+    <el-table-column prop="actions" #default="{ row }" align="right">
+      <el-button
+          :icon="InfoFilled"
+          circle
+          @click="showDetailsDialog(row.id)"
+      />
+    </el-table-column>
   </el-table>
 </template>
 <script setup lang="ts">
-import { onBeforeMount, ref } from "vue";
+import { onBeforeMount, ref, getCurrentInstance } from "vue";
 import { ElNotification } from "element-plus";
 import type ListUser from "@/Services/User/ListUser/ListUser";
 import { listUserUseCase } from "@/Services/User";
+import { InfoFilled } from "@element-plus/icons-vue";
+
+const emitter = getCurrentInstance()?.proxy.emitter;
 
 const loading = ref<boolean>(true);
 const userList = ref<ListUser[]>([]);
@@ -33,6 +43,17 @@ async function loadUserList() {
   }
 
   userList.value = response.users!;
+}
+
+const showDetailsDialog = (userId: string) => {
+  /**
+   * En este caso sería ideal que el propio UserDetails tuviera el botón
+   * y el mismo gestionara el abrir el dialog. Sin embargo he tenido problemillas,
+   * con que la tabla estaba por encima del dialog (no estoy acostumbrada a elements),
+   * y para no entretenerme se ha usado el emitter (el eventHub de vue.js) evento para
+   * abrir dicho dialog.
+   */
+  emitter.emit('showUserDetailsIsNeeded', userId);
 }
 
 onBeforeMount(() => {

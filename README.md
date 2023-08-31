@@ -51,6 +51,9 @@ npm run test:unit
 npm run lint
 ```
 
+
+### QQ
 _¿Cómo plantearías un escenario en el te hubieras descargado los usuarios pero después la API estuviera offline, para que siguiera funcionando el visionado de usuarios?_
+
 Guardaría la lista de la store de vue (pinia), lo que si se quiere persistir se debería de configurar para que esta también se guardase en el local storage, ya que una vez la página se refresque se perdería la información.
 En caso de que el usuario pudiera editar la lista, ya sea creando o eliminando usuarios, sin conexión, se tendrá que guardar dichos cambios para una vez restaurada la conexión, enviar las peticiones necesarias a la api y refrescar la lista del store para tener los datos actualizados y evitar incongruencias.

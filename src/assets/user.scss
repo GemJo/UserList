@@ -1,0 +1,13 @@
+.user-details {
+  .el-descriptions__body {
+    padding: 10px;
+    border-radius: 4px;
+  }
+  &__label.el-descriptions__label {
+    color: var(--el-color-primary);
+    font-weight: 500;
+  }
+  &__text {
+    vertical-align: top;
+  }
+}

@@ -4,19 +4,19 @@ import axios, {AxiosHeaders} from "axios";
 const api: string = 'https://jsonplaceholder.typicode.com/';
 interface Payload {}
 export default abstract class RestAction {
-  protected get(url: string, payload: Payload = {}): AxiosPromise {
+  protected get(url: string, payload: Payload = {}): unknown {
     return this.doCall('GET', url, payload);
   }
 
-  protected post(url: string, payload: Payload = {}): AxiosPromise {
+  protected post(url: string, payload: Payload = {}): unknown {
     return this.doCall('POST', url, payload);
   }
 
-  protected put(url: string, payload: Payload = {}): AxiosPromise {
+  protected put(url: string, payload: Payload = {}): unknown {
     return this.doCall('PUT', url, payload);
   }
 
-  protected delete(url: string, payload: Payload = {}): AxiosPromise {
+  protected delete(url: string, payload: Payload = {}): unknown {
     return this.doCall('DELETE', url, payload);
   }
   private doCall(

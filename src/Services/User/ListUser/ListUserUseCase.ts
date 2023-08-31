@@ -23,7 +23,7 @@ export default class ListUserUseCase implements UseCase {
     }
   }
 
-  private getUsersForComponent(users: UserStructure): ListUser[] {
+  private getUsersForComponent(users: UserStructure[]): ListUser[] {
       return users.map((user: UserStructure) => ({
           id: user.id,
           name: user.name,

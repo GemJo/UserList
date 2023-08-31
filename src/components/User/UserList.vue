@@ -14,11 +14,12 @@
           circle
           @click="showDetailsDialog(row.id)"
       />
+      <slot name="delete" :user="row" />
     </el-table-column>
   </el-table>
 </template>
 <script setup lang="ts">
-import { onBeforeMount, ref, getCurrentInstance } from "vue";
+import {onBeforeMount, ref, getCurrentInstance, onBeforeUnmount} from "vue";
 import { ElNotification } from "element-plus";
 import type ListUser from "@/Services/User/ListUser/ListUser";
 import { listUserUseCase } from "@/Services/User";
@@ -26,10 +27,11 @@ import { InfoFilled } from "@element-plus/icons-vue";
 
 const emitter = getCurrentInstance()?.proxy.emitter;
 
-const loading = ref<boolean>(true);
+const loading = ref<boolean>(false);
 const userList = ref<ListUser[]>([]);
 
 async function loadUserList() {
+  loading.value = true;
   /**
    * Se ha creado una carpeta /Services donde encontramos los casos de uso.
    * Los llevo fuera en servicios para dejar "limpio" el componente y que este solo sea para
@@ -64,5 +66,9 @@ const showDetailsDialog = (userId: string) => {
 
 onBeforeMount(() => {
   loadUserList();
+  emitter.on('userWasDeleted', loadUserList);
 });
+onBeforeUnmount(() => {
+  emitter.off('userWasDeleted', loadUserList);
+})
 </script>

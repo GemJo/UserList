@@ -3,6 +3,7 @@ import GetUserUseCase from "../../../../src/Services/User/GetUser/GetUserUseCase
 
 const providers = [
     {
+        id: 1,
         fromApi: {
             id: 1,
             name: "Leanne Graham",
@@ -51,6 +52,7 @@ const providers = [
         },
     },
     {
+        id: 2,
         fromApi: {
             id: 2,
             name: "Ervin Howell",
@@ -104,36 +106,44 @@ const userRepository = { retrieve: vi.fn() };
 const getUserUseCase = new GetUserUseCase(userRepository);
 describe('Get user and repository fails', () => {
     beforeEach(() => {
+        vi.resetAllMocks();
         userRepository.retrieve.mockRejectedValue();
     });
 
     it('must return success false', async () => {
-        const response = await getUserUseCase.execute();
+        const response = await getUserUseCase.execute('3');
         expect(response.success).toBe(false);
     });
 
     it('must return error', async () => {
-        const response = await getUserUseCase.execute();
+        const response = await getUserUseCase.execute('3');
         expect(response.error).toBe('ErrorRetrievingUser');
     });
 
     it('should not return user', async () => {
-        const response = await getUserUseCase.execute();
+        const response = await getUserUseCase.execute('3');
         expect(response.user).toBeUndefined();
     });
 });
-describe.each(providers)('Get user', (provider) => {
+describe.each(providers)('Get user and works', (provider) => {
     beforeEach(() => {
+        vi.resetAllMocks();
         userRepository.retrieve.mockResolvedValue(provider.fromApi);
     });
 
     it('must return success true', async () => {
-        const response = await getUserUseCase.execute();
+        const response = await getUserUseCase.execute(provider.id);
         expect(response.success).toBe(true);
     });
 
-    it('should not return users collection', async () => {
-        const response = await getUserUseCase.execute();
+    it('must return user details', async () => {
+        const response = await getUserUseCase.execute(provider.id);
         expect(response.user).toStrictEqual(provider.expected);
+    });
+
+    it('must call retrieve method with same id', async () => {
+        await getUserUseCase.execute(provider.id);
+        expect(userRepository.retrieve).toHaveBeenCalledTimes(1);
+        expect(userRepository.retrieve).toHaveBeenCalledWith(provider.id);
     });
 });

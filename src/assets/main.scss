@@ -26,3 +26,14 @@ table {
   word-break: normal;
   gap: 5px;
 }
+
+.dialog-scrollable {
+  display: flex;
+  flex-direction: column;
+  max-height: 95%;
+  .el-dialog__body {
+    backface-visibility: hidden;
+    flex: 1 1 auto;
+    overflow-y: auto;
+  }
+}

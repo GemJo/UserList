@@ -18,7 +18,6 @@ export default class ListUserUseCase implements UseCase {
           users: this.sortByName(this.getUsersForComponent(users)),
         }
     } catch (e) {
-        console.error(e);
         return { success: false, error: e };
     }
   }
